@@ -15,7 +15,7 @@ public class 택배배달과수거하기 {
         int d_cap = cap;
         for (int i = n-1; i >= 0; i--) {
             int turn = deliveries[i] / cap;
-
+            // 결구 작업 못함 ㅜㅜ
         }
         return answer;
     }
