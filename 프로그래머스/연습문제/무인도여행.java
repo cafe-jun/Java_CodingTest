@@ -36,7 +36,7 @@ public class 무인도여행 {
                 }
             }
         }
-
+        System.out.println("무인도여행.solution");
 
         return answer;
     }
