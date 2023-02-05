@@ -3,40 +3,49 @@ package 프로그래머스.연습문제;
 import java.util.Arrays;
 
 public class 숫자변환하기 {
-    static int[] dp = new int[1000000+1];
+    private static final int MAX = Integer.MAX_VALUE;
     public static void main(String[] args) {
+        System.out.println(solution(10	,1000000,	5));
         System.out.println(solution(10	,40,	5));
         System.out.println(solution(10	,40,	30));
         System.out.println(solution(2,5,	4));
+    }
 
-    }
     public static int solution(int x, int y, int n) {
-        Arrays.setAll(dp, num -> Integer.MAX_VALUE);
+
         int answer = 0;
-        if (x==y) {
-            return answer;
+
+        int[] dp = new int[y + 1];
+
+        for (int i = x + 1; i < y + 1; i++) {
+            int a = MAX, b = MAX, c = MAX, d;
+
+            if (isDivided(i, 2) && aboveX(x, i / 2)) a = dp[i / 2];
+            if (isDivided(i, 3) && aboveX(x, i / 3)) b = dp[i / 3];
+            if (aboveX(x, i - n)) c = dp[i - n];
+
+            // 숫자 i를 만들기 위한 최소 방법을 찾음
+            d = Math.min(a, b);
+            d = Math.min(d, c);
+
+            // 만들 수 있으면 d+1 저장
+            // 만들 수 없다면 MAX 저장
+            dp[i] = (d < MAX) ? d + 1 : MAX;
         }
-        dp[x] = 0;
-        dfs(x+n,y,n,1);
-        dfs(x*2,y,n,1);
-        dfs(x*3,y,n,1);
-        if(Integer.MAX_VALUE == dp[y]) {
-            return -1;
-        }
-        return dp[y];
+
+        // y를 만들 수 없다면 -1 반환
+        answer = (dp[y] < MAX) ? dp[y] : -1;
+
+        return answer;
     }
-    public static int dfs(int x,int y,int n,int count) {
-        if(dp[x] != Integer.MAX_VALUE) {
-            dp[x] =Math.min(count,dp[x]);
-            return dp[x];
-        }
-        if(x >= y) {
-            return dp[x];
-        }
-        dp[x] = Math.min(dfs(x+n,y,n,count+1),dp[x]);
-        dp[x] = Math.min(dfs(x*2,y,n,count+1),dp[x]);
-        dp[x] = Math.min(dfs(x*3,y,n,count+1),dp[x]);
-        return dp[x];
+
+    private static boolean aboveX(int x, int num) {
+        return (num >= x);
+    }
+
+    //  (i / 2), (i / 3)의 연산 결과가 자연수인지 확인함
+    private static boolean isDivided(int num, int divide) {
+        return (num / divide > 0 && num % divide == 0);
     }
 }
 
