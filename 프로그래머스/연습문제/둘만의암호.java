@@ -20,22 +20,27 @@ public class 둘만의암호 {
         }
         // char 97 ~ 122
         Map<Character,Integer> totalMap = new HashMap<>();
-        int[] total = new int[(int) 'z'-(int) 'a'+1-map.size()];
+        int[] temp = new int[(int) 'z'-(int) 'a'+1-map.size()];
         int idx = 0;
         for (int i = (int) 'a'; i <= (int) 'z'; i++) {
             if(!map.containsKey((char) i)) {
-                total[idx] =  i;
+                temp[idx] =  i;
                 totalMap.put((char) i,idx);
                 idx+=1;
             }
         }
+        int[] total = new int[temp.length*3];
+        for (int i = 0; i < temp.length*3 ; i++) {
+            total[i] = temp[i%temp.length];
+        }
+
         for (int i = 0; i < s.length(); i++) {
             int jdx = totalMap.get(s.charAt(i));
-            if(jdx+index > total.length-1) {
-                answer += (char) total[jdx+index-total.length];
-            } else {
-                answer += (char) total[jdx+index];
-            }
+//            if(jdx+index > total.length-1) {
+//                answer += (char) total[jdx+index-total.length];
+//            } else {
+            answer += (char) total[jdx+index];
+//            }
 
         }
         return answer;
