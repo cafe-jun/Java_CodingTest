@@ -12,15 +12,9 @@ public class 가장가까운같은글자 {
         int[] answer = new int[s.length()];
         Map<Character,Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
-            if(map.containsKey(s.charAt(i))){
-                int idx = map.get(s.charAt(i));
-                answer[i] = i-idx;
-                map.put(s.charAt(i),i);
-            } else {
-                map.put(s.charAt(i),i);
-                answer[i] = -1;
-            }
-
+            char ch = s.charAt(i);
+            answer[i] = i-map.getOrDefault(ch,i+1);
+            map.put(ch,i);
         }
         return answer;
     }
