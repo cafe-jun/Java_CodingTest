@@ -11,19 +11,25 @@ public class 삼총사 {
     public static int solution(int[] number) {
         int answer = 0;
         boolean[] visited = new boolean[number.length];
-
+        ArrayList<int[]> result =combination(number,visited,0,number.length,3,new ArrayList<int[]>());
+        for (int i = 0; i < result.size(); i++) {
+            int[] temp = result.get(i);
+            if(temp[0]+temp[1]+temp[2] == 0) {
+                answer+=1;
+            }
+        }
         return answer;
     }
 
     static ArrayList<int[]> combination(int[] arr, boolean[] visited, int start, int n, int r,ArrayList<int[]> list) {
         if(r == 0) {
+            ArrayList<Integer> result = new ArrayList<>();
             for (int i = 0; i < n; i++) {
                 if (visited[i]) {
-                    System.out.print(arr[i] + " ");
+                    result.add(arr[i]);
                 }
             }
-            System.out.println();
-            list.add(new int[]{r});
+            list.add(result.stream().mapToInt(i->i).toArray());
             return list;
         }
 
@@ -32,5 +38,6 @@ public class 삼총사 {
             combination(arr, visited, i + 1, n, r - 1,list);
             visited[i] = false;
         }
+        return list;
     }
 }
