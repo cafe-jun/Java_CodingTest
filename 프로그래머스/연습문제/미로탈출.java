@@ -25,13 +25,12 @@ public class 미로탈출 {
             }
         }
         Queue<Points> exitQueue = new LinkedList<>();
-        char[][] leverMatrix = matrix.clone();
+        char[][] leverMatrix = copy(matrix);
         leverMatrix[leverQueue.peek().r][leverQueue.peek().r] = 'X';
         while(!leverQueue.isEmpty()) {
             Points points = leverQueue.poll();
-            if(leverMatrix[points.r][points.c] == 'L') {
+            if(matrix[points.r][points.c] == 'L') {
                 exitQueue.offer(new Points(points.r, points.c, points.time));
-                answer += points.time;
                 break;
             }
             for (int i = 0; i <4; i++) {
@@ -39,17 +38,17 @@ public class 미로탈출 {
                 int nc = dc[i]+ points.c;
                 if(0<=nr && nr<maps.length && 0<=nc && nc<maps[0].length()) {
                     char prev = leverMatrix[nr][nc];
-                    if(prev == 'O' || prev == 'L') {
+                    if (prev != 'X') {
                         leverMatrix[nr][nc] = 'X';
                         leverQueue.offer(new Points(nr, nc, points.time + 1));
                     }
                 }
             }
         }
-        char[][] exitMatrix = matrix.clone();
+        char[][] exitMatrix = copy(matrix);
         while(!exitQueue.isEmpty()) {
             Points points = exitQueue.poll();
-            if(exitMatrix[points.r][points.c] == 'L') {
+            if(matrix[points.r][points.c] == 'E') {
                 answer += points.time;
                 break;
             }
@@ -57,9 +56,9 @@ public class 미로탈출 {
                 int nr = dr[i]+ points.r;
                 int nc = dc[i]+ points.c;
                 if(0<=nr && nr<maps.length && 0<=nc && nc<maps[0].length()) {
-                    char prev = matrix[nr][nc];
-                    if(prev == 'O' || prev == 'L') {
-                        matrix[nr][nc] = 'X';
+                    char prev = exitMatrix[nr][nc];
+                    if(prev != 'X') {
+                        exitMatrix[nr][nc] = 'X';
                         exitQueue.offer(new Points(nr, nc, points.time + 1));
                     }
                 }
@@ -70,6 +69,20 @@ public class 미로탈출 {
             return -1;
         }
         return answer;
+    }
+    public static char[][] copy(char[][] src) {
+        if (src == null) {
+            return null;
+        }
+
+        char[][] copy = new char[src.length][];
+
+        for (int i = 0; i < src.length; i++) {
+            copy[i] = new char[src[i].length];
+            System.arraycopy(src[i], 0, copy[i], 0, src[i].length);
+        }
+
+        return copy;
     }
 }
 
