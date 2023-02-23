@@ -8,6 +8,7 @@ public class 카카오프렌즈컬러링북 {
     public static void main(String[] args) {
         System.out.println(solution(6,4,new int[][]{{1, 1, 1, 0},{1, 2, 2, 0},{1, 0, 0, 1},{0, 0, 0, 1},{0, 0, 0, 3},{0, 0, 0, 3}}));
         System.out.println(solution(6,4,new int[][]{{1, 1, 1, 0},{1, 2, 2, 0},{1, 0, 0, 1},{0, 0, 0, 1},{0, 0, 0, 3},{0, 0, 0, 3}}));
+        System.out.println(solution(6,4,new int[][]{{1, 1, 1, 0},{1, 2, 2, 0},{1, 0, 0, 1},{0, 0, 0, 1},{0, 0, 0, 3},{0, 0, 0, 3}}));
     }
     public static int[] solution(int m, int n, int[][] picture) {
         int[] answer = new int[2];
