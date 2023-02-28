@@ -31,6 +31,7 @@ public class 할인행사 {
             }
             if(day >= 10) {
                 System.out.println("할인행사.solution");
+                System.out.println("할인행사.solution");
             }
         }
         return answer;
