@@ -6,6 +6,7 @@ public class 연속펄스부분수열의합 {
         System.out.println(solution(new int[]{3, -1, 2, 4}));
         System.out.println(solution(new int[]{2,3,-6,1,3,-1,2,4}));
         System.out.println(solution(new int[]{2,3,-6,1,3,-1,2,4}));
+        System.out.println(solution(new int[]{2,3,-6,1,3,-1,2,4}));
         
 
         
